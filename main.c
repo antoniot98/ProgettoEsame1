@@ -31,7 +31,7 @@ int main(int argc, char const *argv[]) {
     gets(messaggio);
 
     Crittografia(messaggio, &mat_sostituzione[0][0], 4, 8, testo_crittografato);
-    Decrittografia(testo_crittografato, &mat_sostituzione[0][0], 4, 8, testo_decrittografato);
     printf("\nIl testo crittografato e uguale a:%s\n", testo_crittografato);
+    Decrittografia(testo_crittografato, &mat_sostituzione[0][0], 4, 8, testo_decrittografato);
     printf("\nIl testo decrittografato e uguale a:%s\n", testo_decrittografato);
 }

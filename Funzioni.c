@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
-
+/* La funzione riceve in input la matrice e relativo numero riga e colonne e stampa a video i suoi elementi*/
 void stampa_matrice(char *mat, int n_righe, int n_col) {
     for (int i = 0; i < n_righe; i++) {
         for (int j = 0; j < n_col; j++) {
@@ -11,6 +11,7 @@ void stampa_matrice(char *mat, int n_righe, int n_col) {
     }
 }
 
+/*La funzione riotrna la posizione del'carattere chiave in una matrice di caratteri passata con un algoritmo di ricerca sequenziale*/
 void posizione_lettera(char chiave, char *mat, int n_righe, int n_col, int *riga, int *colonna) {
     int i = 0;
 
@@ -24,6 +25,7 @@ void posizione_lettera(char chiave, char *mat, int n_righe, int n_col, int *riga
     }
 }
 
+/*La funziona elimina gli spazi tra le parole*/
 void elimina_spazi(char *testo) {
     char testo_senza_spazi[100] = "\0";
     char *token;
@@ -44,7 +46,7 @@ void controllo_lettere(char *testo) {
     int i = 0;
     elimina_spazi(testo);
     strupr(testo);
-    //printf("\n%s\n", testo);
+
 
     /*Ciclo while finche c'è il testo controlla le coppie di lettere se sono uguali copia la parte dopo in
     una variabile temporanea, aggiugne una x e copia il contenuto della variabile temporanea nell'array principale*/
@@ -61,6 +63,7 @@ void controllo_lettere(char *testo) {
     }
 }
 
+/*La funziona elimina le X che sono state aggiunte tra le coppie consecutive di caratteri uguali*/
 void ripristina_lettere(char *testo) {
     char temp[100];
     int i = 0;
@@ -78,12 +81,22 @@ void ripristina_lettere(char *testo) {
     }
 }
 
+/*
+ *La funzione effettua la codifica del testo passato n riferimento alla posizione degli elementi della matrice passata:
+ * Se la posizione dei due caratteri ha lo stesso indice di riga prendo il carattere della colonna successiva
+ * Se la posizione dei due caratteri ha lo stesso numero di colonna allora prendo il carattere alla riga successiva
+ * In questi due casi attraverso degli if annidati verifico che, nel primo caso non mi trovi nell'ultima colonna
+ *  nel secondo caso che non mi trovi nell'ultima riga
+ * Se il numero di riga e di colonna sono diversi prendo il carattere della stessa riga ma della colonna dell'altro
+ */
+
 void Crittografia(char *testo, char *mat_sostituzione, int n_righe, int n_col, char *testo_crittografato) {
     int i = 0;
     int riga1, colonna1, riga2, colonna2;
     controllo_lettere(testo);
-
+    //Finhè l'inidice e minore della lunghezza del testo
     while (i < strlen(testo) - 1) {
+        //recupero la posizione delle lettere corrispondenti nella matrice di stringhe
         posizione_lettera(*(testo + i), mat_sostituzione, n_righe, n_col, &riga1, &colonna1);
         posizione_lettera(*(testo + i + 1), mat_sostituzione, n_righe, n_col, &riga2, &colonna2);
 
@@ -120,6 +133,14 @@ void Crittografia(char *testo, char *mat_sostituzione, int n_righe, int n_col, c
     }
 }
 
+/*La funzione effettua la decifratura del messaggio crittografato in riferimento  alla posizione delle lettere della matrice passata
+ *
+ * Se la posizione dei due caratteri ha lo stesso indice di riga prendo il carattere della colonna precedente
+ * Se la posizione dei due caratteri ha lo stesso numero di colonna allora prendo il carattere alla riga precdente
+ * In questi due casi attraverso degli if annidati verifico che, nel primo caso non mi trovi nella prima colonna
+ *  nel secondo caso che non mi trovi nella prima riga
+ * Se il numero di riga e di colonna sono diversi prendo il carattere della stessa riga ma della colonna dell'altro
+ */
 void Decrittografia(char *testo_crittografato, char *mat_sostituzione, int n_righe, int n_col, char *testo) {
     int i = 0;
     int riga1, colonna1, riga2, colonna2;
@@ -148,8 +169,8 @@ void Decrittografia(char *testo_crittografato, char *mat_sostituzione, int n_rig
                 *(testo + i) = *(mat_sostituzione + (n_righe - 1) * n_col + colonna1);
                 *(testo + i + 1) = *(mat_sostituzione + (riga2 - 1) * n_col + colonna2);
             } else {
-                *(testo + i) = *(mat_sostituzione + (n_righe - 1) * n_col + colonna1);
-                *(testo + i + 1) = *(mat_sostituzione + (riga2 - 1) * n_col + colonna2);
+                *(testo + i) = *(mat_sostituzione + (riga1 - 1) * n_col + colonna1);
+                *(testo + i + 1) = *(mat_sostituzione + (n_righe - 1) * n_col + colonna2);
             }
 
             i = i + 2;
@@ -159,5 +180,6 @@ void Decrittografia(char *testo_crittografato, char *mat_sostituzione, int n_rig
             i = i + 2;
         }
     }
+    
     ripristina_lettere(testo);
 }
