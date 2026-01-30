@@ -44,13 +44,14 @@ void elimina_spazi(char *testo) {
 void controllo_lettere(char *testo) {
     char temp[100];
     int i = 0;
+    int len=strlen(testo);
     elimina_spazi(testo);
     strupr(testo);
 
 
     /*Ciclo while finche c'è il testo controlla le coppie di lettere se sono uguali copia la parte dopo in
     una variabile temporanea, aggiugne una x e copia il contenuto della variabile temporanea nell'array principale*/
-    while (i < (strlen(testo) - 1)) {
+    while (i < len - 1) {
         if (*(testo + i) == *(testo + i + 1)) {
             strcpy(temp, testo + i + 1);
             *(testo + i + 1) = 'X';
@@ -94,8 +95,9 @@ void Crittografia(char *testo, char *mat_sostituzione, int n_righe, int n_col, c
     int i = 0;
     int riga1, colonna1, riga2, colonna2;
     controllo_lettere(testo);
+    int len=strlen(testo);
     //Finhè l'inidice e minore della lunghezza del testo
-    while (i < strlen(testo) - 1) {
+    while (i <= len - 1) {
         //recupero la posizione delle lettere corrispondenti nella matrice di stringhe
         posizione_lettera(*(testo + i), mat_sostituzione, n_righe, n_col, &riga1, &colonna1);
         posizione_lettera(*(testo + i + 1), mat_sostituzione, n_righe, n_col, &riga2, &colonna2);
@@ -144,8 +146,8 @@ void Crittografia(char *testo, char *mat_sostituzione, int n_righe, int n_col, c
 void Decrittografia(char *testo_crittografato, char *mat_sostituzione, int n_righe, int n_col, char *testo) {
     int i = 0;
     int riga1, colonna1, riga2, colonna2;
-
-    while (i <= strlen(testo_crittografato) - 1) {
+    int len=strlen(testo_crittografato);
+    while (i <= len  - 1) {
         posizione_lettera(*(testo_crittografato + i), mat_sostituzione, n_righe, n_col, &riga1, &colonna1);
         posizione_lettera(*(testo_crittografato + i + 1), mat_sostituzione, n_righe, n_col, &riga2, &colonna2);
 
