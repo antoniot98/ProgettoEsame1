@@ -2,6 +2,17 @@
 #include <stdlib.h>
 #include "Funzioni.h"
 
+/*
+ *Nel main vengono dichiarate le stringhe vuote e la matrice di sostituzione.
+ *In un ciclo for  vengono effettuati 4*8 permutazioni delle nella matrice, generando due indici di
+ *riga e di colonna  tramite la funzione rand(), e vengono scambiati reciprocamente.
+ *Viene chiesto di inserire all'utente un messaggio da cifrare, il messaggio viene passato alla funzione Crittografia
+ *insieme alla matrice di sostituzione per efettuarne la cifratura, e viene stampato a video il messaggio cifrato.
+ *Infine il messaggio cifrato viene poi passato alla funzione Decrittografia insieme alla matrice, che lo ritrasforma
+ *nel messaggio originale inserito dall'utente e lo mostra a video.
+ *
+ */
+
 int main(int argc, char const *argv[]) {
     char testo_crittografato[100] = "";
     // char messaggio[100]="LET US MEET AT NOON";

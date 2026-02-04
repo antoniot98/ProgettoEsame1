@@ -11,7 +11,11 @@ void stampa_matrice(char *mat, int n_righe, int n_col) {
     }
 }
 
-/*La funzione riotrna la posizione del'carattere chiave in una matrice di caratteri passata con un algoritmo di ricerca sequenziale*/
+/*La funzione riceve in input una chiave, una matrice con il relativo numero di righe e di colonne e due puntatori di
+ *variabili di numeri interi.
+ * Si effettua la ricerca della chiave nella matrice e viene salvata la posizione dell'elemento trovato assegnando
+ * l'inidce di riga e di colonna rispetivamente nelle variabili passate per riferimento alla funzione.
+ */
 void posizione_lettera(char chiave, char *mat, int n_righe, int n_col, int *riga, int *colonna) {
     int i = 0;
 
@@ -25,7 +29,7 @@ void posizione_lettera(char chiave, char *mat, int n_righe, int n_col, int *riga
     }
 }
 
-/*La funziona elimina gli spazi tra le parole*/
+/*La funzione riceve in input un array di caratteri ed elimina gli spazi tra le parole*/
 void elimina_spazi(char *testo) {
     char testo_senza_spazi[100] = "\0";
     char *token;
@@ -40,16 +44,16 @@ void elimina_spazi(char *testo) {
     strcpy(testo, testo_senza_spazi);
 }
 
-/* Funzione che controlla le coppie di lettere uguali ed aggiunge una X tra le due*/
+/* Funzione riceve in input una stringa e controlla se ci sono coppie di lettere uguali aggiungendo una X tra le due */
 void controllo_lettere(char *testo) {
     char temp[100];
     int i = 0;
-    int len=strlen(testo);
+    int len = strlen(testo);
     elimina_spazi(testo);
     strupr(testo);
 
 
-    /*Ciclo while finche c'è il testo controlla le coppie di lettere se sono uguali copia la parte dopo in
+    /* finche c'è il testo controlla le coppie di lettere se sono uguali copia la parte dopo in
     una variabile temporanea, aggiugne una x e copia il contenuto della variabile temporanea nell'array principale*/
     while (i < len - 1) {
         if (*(testo + i) == *(testo + i + 1)) {
@@ -64,7 +68,7 @@ void controllo_lettere(char *testo) {
     }
 }
 
-/*La funziona elimina le X che sono state aggiunte tra le coppie consecutive di caratteri uguali*/
+/*La funziona riceve una stringa di testo ed elimina le X che sono state aggiunte tra le coppie consecutive di caratteri uguali*/
 void ripristina_lettere(char *testo) {
     char temp[100];
     int i = 0;
@@ -83,19 +87,21 @@ void ripristina_lettere(char *testo) {
 }
 
 /*
- *La funzione effettua la codifica del testo passato in riferimento alla posizione degli elementi della matrice passata:
+ *La funzione riceve in input una stringa contente il messaggio, la matrice di sostituzione e il relativo numero di
+ *righe e colonne e una stringa vuotae.
+ *Effettua la codifica del testo passato in riferimento alla posizione degli elementi della matrice:
  * Se la posizione dei due caratteri ha lo stesso indice di riga prendo il carattere della colonna successiva
- * Se la posizione dei due caratteri ha lo stesso numero di colonna allora prendo il carattere alla riga successiva
+ * Se la posizione dei due caratteri ha lo stesso indice di colonna allora prendo il carattere alla riga successiva
  * In questi due casi attraverso degli if annidati verifico che, nel primo caso non mi trovi nell'ultima colonna
  *  nel secondo caso che non mi trovi nell'ultima riga
- * Se il numero di riga e di colonna sono diversi prendo il carattere della stessa riga ma della colonna dell'altro
+ * Se il numero di riga e di colonna sono diversi allora prendo il carattere della stessa riga ma della colonna dell'altro
  */
 
 void Crittografia(char *testo, char *mat_sostituzione, int n_righe, int n_col, char *testo_crittografato) {
     int i = 0;
     int riga1, colonna1, riga2, colonna2;
     controllo_lettere(testo);
-    int len=strlen(testo);
+    int len = strlen(testo);
     //Finhè l'inidice e minore della lunghezza del testo
     while (i <= len - 1) {
         //recupero la posizione delle lettere corrispondenti nella matrice di stringhe
@@ -135,10 +141,10 @@ void Crittografia(char *testo, char *mat_sostituzione, int n_righe, int n_col, c
     }
 }
 
-/*La funzione effettua la decifratura del messaggio crittografato in riferimento  alla posizione delle lettere della matrice passata
- *
+/*La funzione riceve in input una stringa di testo una matrice e il numero di rihe e di colonne più una stringa vuota
+ *ed effettua la decifratura del messaggio crittografato in riferimento  alla posizione delle lettere nella matrice passata
  * Se la posizione dei due caratteri ha lo stesso indice di riga prendo il carattere della colonna precedente
- * Se la posizione dei due caratteri ha lo stesso numero di colonna allora prendo il carattere alla riga precdente
+ * Se la posizione dei due caratteri ha lo stesso indice di colonna allora prendo il carattere alla riga precedente
  * In questi due casi attraverso degli if annidati verifico che, nel primo caso non mi trovi nella prima colonna
  *  nel secondo caso che non mi trovi nella prima riga
  * Se il numero di riga e di colonna sono diversi prendo il carattere della stessa riga ma della colonna dell'altro
@@ -146,8 +152,8 @@ void Crittografia(char *testo, char *mat_sostituzione, int n_righe, int n_col, c
 void Decrittografia(char *testo_crittografato, char *mat_sostituzione, int n_righe, int n_col, char *testo) {
     int i = 0;
     int riga1, colonna1, riga2, colonna2;
-    int len=strlen(testo_crittografato);
-    while (i <= len  - 1) {
+    int len = strlen(testo_crittografato);
+    while (i <= len - 1) {
         posizione_lettera(*(testo_crittografato + i), mat_sostituzione, n_righe, n_col, &riga1, &colonna1);
         posizione_lettera(*(testo_crittografato + i + 1), mat_sostituzione, n_righe, n_col, &riga2, &colonna2);
 
@@ -182,6 +188,6 @@ void Decrittografia(char *testo_crittografato, char *mat_sostituzione, int n_rig
             i = i + 2;
         }
     }
-    
+
     ripristina_lettere(testo);
 }
