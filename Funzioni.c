@@ -64,7 +64,7 @@ void controllo_lettere(char *testo) {
         i = i + 2;
     }
     if (strlen(testo) % 2 != 0) {
-        *(testo + strlen(testo)) = 'X';
+        *(testo + len) = 'X';
     }
 }
 
@@ -81,8 +81,8 @@ void ripristina_lettere(char *testo) {
         }
         i++;
     }
-    if (*(testo + strlen(testo) - 1) == 'X') {
-        *(testo + strlen(testo) - 1) = '\0';
+    if (*(testo + len - 1) == 'X') {
+        *(testo + len - 1) = '\0';
     }
 }
 
