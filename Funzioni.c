@@ -72,9 +72,9 @@ void controllo_lettere(char *testo) {
 void ripristina_lettere(char *testo) {
     char temp[100];
     int i = 0;
+    int len = strlen(testo);
 
-
-    while (i < (strlen(testo) - 1)) {
+    while (i < (len - 1)) {
         if (*(testo + i) == 'X' && *(testo + i + 1) == *(testo + i - 1)) {
             strcpy(temp, testo + i + 1);
             strcpy(testo + i, temp);
