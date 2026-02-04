@@ -83,7 +83,7 @@ void ripristina_lettere(char *testo) {
 }
 
 /*
- *La funzione effettua la codifica del testo passato n riferimento alla posizione degli elementi della matrice passata:
+ *La funzione effettua la codifica del testo passato in riferimento alla posizione degli elementi della matrice passata:
  * Se la posizione dei due caratteri ha lo stesso indice di riga prendo il carattere della colonna successiva
  * Se la posizione dei due caratteri ha lo stesso numero di colonna allora prendo il carattere alla riga successiva
  * In questi due casi attraverso degli if annidati verifico che, nel primo caso non mi trovi nell'ultima colonna
