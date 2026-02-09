@@ -42,6 +42,7 @@ void elimina_spazi(char *testo) {
     }
 
     strcpy(testo, testo_senza_spazi);
+    *(testo+strlen(testo)) = '\0';
 }
 
 /* Funzione riceve in input una stringa e controlla se ci sono coppie di lettere uguali aggiungendo una X tra le due */
@@ -65,7 +66,10 @@ void controllo_lettere(char *testo) {
     }
     if (strlen(testo) % 2 != 0) {
         *(testo + len) = 'X';
+
     }
+    *(testo + strlen(testo)) = '\0';
+
 }
 
 /*La funziona riceve una stringa di testo ed elimina le X che sono state aggiunte tra le coppie consecutive di caratteri uguali*/
@@ -84,6 +88,7 @@ void ripristina_lettere(char *testo) {
     if (*(testo + len - 1) == 'X') {
         *(testo + len - 1) = '\0';
     }
+    *(testo + strlen(testo)) = '\0';
 }
 
 /*
@@ -139,6 +144,7 @@ void Crittografia(char *testo, char *mat_sostituzione, int n_righe, int n_col, c
             i = i + 2;
         }
     }
+    *(testo_crittografato + strlen(testo_crittografato))='\0';
 }
 
 /*La funzione riceve in input una stringa di testo una matrice e il numero di rihe e di colonne più una stringa vuota
